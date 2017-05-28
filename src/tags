@@ -1,0 +1,23 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Vector	containers/vector.cc	/^Vector::Vector() : size_(0), capacity_(2) {$/;"	f	class:containers::Vector
+Vector	containers/vector.cc	/^Vector::Vector(size_t n) : size_(n), capacity_(tools::capacity_for_size(n)) {$/;"	f	class:containers::Vector
+Vector	containers/vector.cc	/^~Vector::Vector() {$/;"	f	class:containers::~Vector
+Vector	containers/vector.h	/^class Vector {$/;"	c	namespace:containers
+__TOOLS_H	tools/tools.h	2;"	d
+__VECTOR_H	containers/vector.h	2;"	d
+capacity_	containers/vector.h	/^  long capacity_;$/;"	m	class:containers::Vector
+capacity_for_size	tools/tools.cc	/^long capacity_for_size(size_t n, long base=2) {$/;"	f	namespace:containers::tools
+containers	containers/vector.cc	/^namespace containers {$/;"	n	file:
+containers	containers/vector.h	/^namespace containers {$/;"	n
+containers	tools/tools.cc	/^namespace containers {$/;"	n	file:
+containers	tools/tools.h	/^namespace containers {$/;"	n
+data_	containers/vector.h	/^  std::unique_ptr<T> data_;$/;"	m	class:containers::Vector
+noexcept	containers/vector.h	/^    Vector(Vector&& v) noexcept;$/;"	m	class:containers::Vector
+size_	containers/vector.h	/^  size_t size_;$/;"	m	class:containers::Vector
+tools	tools/tools.cc	/^namespace tools {$/;"	n	namespace:containers	file:
+tools	tools/tools.h	/^namespace tools {$/;"	n	namespace:containers

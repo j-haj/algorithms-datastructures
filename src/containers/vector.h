@@ -60,6 +60,8 @@ class Vector {
      */
     Vector& operator=(Vector&& v);
 
+    // TODO: Add index operator[] here
+    
     /**
      * Destructor
      */
