@@ -29,7 +29,10 @@ Vector::Vector(const Vector& v) : size_(v.size()), capacity_(v.capacity()) {
   }
 }
 
-
+template <typename T>
+Vector::Vector(const Vector&& v) : size_(v.size()), capacity_(v.capacity()) {
+  data_ = std::move(v.data_);
+}
 
 template <typename T>
 ~Vector::Vector() {

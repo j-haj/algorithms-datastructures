@@ -59,8 +59,13 @@ class Vector {
      * @param v vector whose data is being moved
      */
     Vector& operator=(Vector&& v);
-
-    // TODO: Add index operator[] here
+    
+    /**
+     * Indexing
+     *
+     * @return value at index ``i``
+     */
+    T operator[](const size_t i);
     
     /**
      * Destructor
