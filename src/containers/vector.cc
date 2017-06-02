@@ -3,17 +3,17 @@
 namespace containers {
 
 template <typename T>
-Vector::Vector() : size_(0), capacity_(2) {
+Vector<T>::Vector() : size_(0), capacity_(2) {
   data_ = std::make_unique<T>(new T[2]);
 }
 
 template <typename T>
-Vector::Vector(size_t n) : size_(n), capacity_(tools::capacity_for_size(n)) {
-  data_ = std::make_unique<T>(new T[capacity_]);
+Vector<T>::Vector(size_t n) : size_(n), capacity_(tools::capacity_for_size(n)) {
+  data_ = std::make_unique<T[]>(new T[capacity_]);
 }
 
 template <typename T>
-Vector::Vector(std::initializer_list<T> elements) : size_(elements.size()),
+Vector<T>::Vector(std::initializer_list<T> elements) : size_(elements.size()),
   capacity_(tools::capacity_for_size(l.size())) {
   data_ = std::make_unique<T>(new T[capacity_]);
   for (size_t i = 0; i < size_; ++i) {
@@ -22,7 +22,7 @@ Vector::Vector(std::initializer_list<T> elements) : size_(elements.size()),
 }
 
 template <typename T>
-Vector::Vector(const Vector& v) : size_(v.size()), capacity_(v.capacity()) {
+Vector<T>::Vector(const Vector& v) : size_(v.size()), capacity_(v.capacity()) {
   data_ = std::make_unique<T>(new T[capacity_]);
   for (size_t i = 0; i < size_; ++i) {
     data_[i] = v[i];
@@ -30,13 +30,23 @@ Vector::Vector(const Vector& v) : size_(v.size()), capacity_(v.capacity()) {
 }
 
 template <typename T>
-Vector::Vector(const Vector&& v) : size_(v.size()), capacity_(v.capacity()) {
+Vector<T>::Vector(const Vector&& v) : size_(v.size()), capacity_(v.capacity()) {
   data_ = std::move(v.data_);
 }
 
 template <typename T>
-~Vector::Vector() {
+~Vector<T>::Vector() {
   data_.release();
+}
+
+template <typename T>
+size_t Vector<T>::size() const {
+  return size_;
+}
+
+template <typename T>
+size_t Vector<T>::capacity() {
+  return capacity_;
 }
 
 } // namespace containers
