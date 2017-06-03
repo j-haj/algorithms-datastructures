@@ -1,11 +1,8 @@
 #include "vector.h"
+#include "tools/tools.h"
 
+#include <memory>
 namespace containers {
-
-template <typename T>
-Vector<T>::Vector() : size_(0), capacity_(2) {
-  data_ = std::make_unique<T>(new T[2]);
-}
 
 template <typename T>
 Vector<T>::Vector(size_t n) : size_(n), capacity_(tools::capacity_for_size(n)) {

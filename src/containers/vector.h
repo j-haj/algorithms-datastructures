@@ -1,7 +1,8 @@
 #ifndef __VECTOR_H
 #define __VECTOR_H
 
-#include<experimental/optional>
+#include <experimental/optional>
+#include <memory>
 
 namespace containers {
 /**
@@ -31,7 +32,7 @@ class Vector {
     /**
      * Construct an empty vector
      */
-    Vector();
+    Vector() : size_(0), capacity_(2), data_(std::make_unique<T>(new T[2])) {};
 
     /**
      * Copy constructor
@@ -72,8 +73,6 @@ class Vector {
     /**
      * Destructor
      */
-    ~Vector();
-
     //-------------------------------------------------------------------------
     //
     // Member functions
@@ -136,18 +135,18 @@ class Vector {
 
   private:
 
-  /// Size represents the number of elements stored in the vector
-  size_t size_;
+    /// Size represents the number of elements stored in the vector
+    size_t size_;
 
-  /// Capacity is the number of elements that can be stored in the vector before
-  /// more memory needs to be allocated
-  long capacity_;
+    /// Capacity is the number of elements that can be stored in the vector before
+    /// more memory needs to be allocated
+    long capacity_;
 
-  /// Pointer to the underlying data
-  std::unique_ptr<T> data_;
+    /// Pointer to the underlying data
+    std::unique_ptr<T> data_;
 
 };
 
-}
+} // namespace containers
 
 #endif // __VECTOR_H
