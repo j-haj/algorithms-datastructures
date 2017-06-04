@@ -1,11 +1,11 @@
-#include "tools.h"
+#include "tools/tools.h"
 
 #include <cmath>
 
 namespace containers {
 namespace tools {
 
-long capacity_for_size(size_t n, long base=2) {
+long capacity_for_size(std::size_t n, long base) {
   return long(std::log(n)/std::log(base)) + 1;
 }
 

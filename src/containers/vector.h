@@ -1,8 +1,12 @@
 #ifndef __VECTOR_H
 #define __VECTOR_H
 
+#include <cstddef>
 #include <experimental/optional>
 #include <memory>
+#include <stdexcept>
+
+#include "tools/tools.h"
 
 namespace containers {
 /**
@@ -20,33 +24,53 @@ class Vector {
      *
      * @param elements list of elements
      */
-    Vector(std::initializer_list<T> elements);
+    Vector(std::initializer_list<T> elements) : size_(elements.size()),
+      capacity_(tools::capacity_for_size(elements.size())),
+      data_(std::make_unique<T*>(new T[capacity_])) {
+        for (std::size_t i = 0; i < size_; ++i) {
+          data_[i] = elements[i];
+        }  
+      };
 
     /**
      * Contruct a vector that ``n`` elements
      *
      * @param number of elements to be insertedin vector
      */
-    Vector(size_t n);
+    Vector(std::size_t n) : size_(n), capacity_(tools::capacity_for_size(n)), 
+    data_(std::make_unique<T*>(new T[capacity_])) {};
 
     /**
      * Construct an empty vector
      */
-    Vector() : size_(0), capacity_(2), data_(std::make_unique<T>(new T[2])) {};
+    Vector() : size_(0), capacity_(2), data_(std::make_unique<T*>(new T[2])) {};
 
     /**
      * Copy constructor
      *
      * @param v vector whose elements will be copied to create new vector
      */
-    Vector(const Vector& v);
+    Vector(const Vector& v) : size_(v.size()), capacity_(v.capacity()),
+      data_(std::make_unique<T*>(new T[capacity_])) {
+        for (std::size_t i = 0; i < size_; ++i) {
+          data_[i] = v[i];
+        }
+      };
 
     /**
      * Copy assignment
      *
      * @param v vector whoe elements will be copied to create a new vector
      */
-    Vector& operator=(const Vector& v);
+    Vector& operator=(const Vector& v) {
+      if (size_ != v.size()) {
+        throw std::runtime_error("Vectors must have same size when copying");
+      }
+      for (std::size_t i = 0; i < size_; ++i) {
+        data_[i] = v.data_[i];
+      }
+      return *this;
+    }
 
     /**
      * Move constructor - moves the data of ``v`` to newly created vector's
@@ -54,25 +78,36 @@ class Vector {
      *
      * @param v vector whose data is being moved
      */
-    Vector(Vector&& v) noexcept;
+    Vector(Vector&& v) noexcept : size_(v.size()), capacity_(v.capacity()),
+      data_(std::move(v.data_)) {}
 
     /**
      * Move assignment
      *
      * @param v vector whose data is being moved
      */
-    Vector& operator=(Vector&& v);
-    
+    Vector& operator=(Vector&& v) {
+      if (size_ != v.size()) {
+        size_ = v.size();
+        capacity_ = v.capacity_();
+      }
+      data_ = std::move(v.data_);
+    }    
     /**
      * Indexing
      *
      * @return value at index ``i``
      */
-    T operator[](const size_t i);
+    T operator[](const std::size_t i) { return data_[i]; }
     
     /**
      * Destructor
      */
+    ~Vector() {
+      size_ = 0;
+      capacity_ = 0;
+      data_.release();
+    }
     //-------------------------------------------------------------------------
     //
     // Member functions
@@ -121,7 +156,7 @@ class Vector {
      *
      * @return the number of elements in the vector
      */
-    size_t size();
+    std::size_t size() { return size_; }
 
     /**
      * Returns the number of elements that can be added to the vector before
@@ -130,22 +165,22 @@ class Vector {
      * @return number of elements the vector can hold before more memory is
      * allocated.
      */
-    long capacity();
+    long capacity() { return capacity_; }
 
 
   private:
 
     /// Size represents the number of elements stored in the vector
-    size_t size_;
+    std::size_t size_;
 
     /// Capacity is the number of elements that can be stored in the vector before
     /// more memory needs to be allocated
     long capacity_;
 
     /// Pointer to the underlying data
-    std::unique_ptr<T> data_;
+    std::unique_ptr<T*> data_;
 
-};
+}; // class Vector
 
 } // namespace containers
 

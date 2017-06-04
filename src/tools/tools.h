@@ -1,6 +1,8 @@
 #ifndef __TOOLS_H
 #define __TOOLS_H
 
+#include <cstddef>
+
 namespace containers {
 namespace tools {
 
@@ -13,6 +15,7 @@ namespace tools {
  *
  * @return the exponent required to make ``pow(base, X) > n`` true
  */
-long capacity_for_size(size_t n, long base=2);
-
+long capacity_for_size(std::size_t n, long base=2);
+} // namespace tools
+} // namespace containers
 #endif // __TOOLS_H
