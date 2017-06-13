@@ -1,0 +1,260 @@
+\hypertarget{classcontainers_1_1_vector}{}\section{containers\+:\+:Vector$<$ T $>$ Class Template Reference}
+\label{classcontainers_1_1_vector}\index{containers\+::\+Vector$<$ T $>$@{containers\+::\+Vector$<$ T $>$}}
+
+
+{\ttfamily \#include $<$vector.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcontainers_1_1_vector_aa52463e44a833734438f930bd042950d}{Vector} (std\+::initializer\+\_\+list$<$ T $>$ elements)
+\item 
+\hyperlink{classcontainers_1_1_vector_a7100579cb97bfd12a22563ecba4790c3}{Vector} (std\+::size\+\_\+t n)
+\item 
+\hyperlink{classcontainers_1_1_vector_aeb1cf60022c7fc50ae6b17b2cba845ea}{Vector} ()
+\item 
+\hyperlink{classcontainers_1_1_vector_a53ca201d23d5093f1f0a5680bf878a61}{Vector} (const \hyperlink{classcontainers_1_1_vector}{Vector} \&v)
+\item 
+\hyperlink{classcontainers_1_1_vector}{Vector} \& \hyperlink{classcontainers_1_1_vector_a631c15e8044b459fdf35a9f0acd0d5b0}{operator=} (const \hyperlink{classcontainers_1_1_vector}{Vector} \&v)
+\item 
+\hyperlink{classcontainers_1_1_vector_a2c7dfd50610c1fc054516f18ec8a9452}{Vector} (\hyperlink{classcontainers_1_1_vector}{Vector} \&\&v) noexcept
+\item 
+\hyperlink{classcontainers_1_1_vector}{Vector} \& \hyperlink{classcontainers_1_1_vector_aade29fc98f40e726bc1c624d0157e397}{operator=} (\hyperlink{classcontainers_1_1_vector}{Vector} \&\&v)
+\item 
+T \hyperlink{classcontainers_1_1_vector_a8dcbd38c932f114a8237785f8272712f}{operator\mbox{[}$\,$\mbox{]}} (const std\+::size\+\_\+t i) const
+\item 
+\hyperlink{classcontainers_1_1_vector_aa34389ddf377eea569195c234feaef93}{$\sim$\+Vector} ()
+\item 
+void \hyperlink{classcontainers_1_1_vector_ae9ecdc8f09edd4d689b4cb90a05de712}{push\+\_\+back} (const T \&x)
+\item 
+T \hyperlink{classcontainers_1_1_vector_a35cb0393f7ba3bc682c1a58a20471a69}{pop} (size\+\_\+t index=0)
+\item 
+std\+::experimental\+::optional$<$ T $>$ \hyperlink{classcontainers_1_1_vector_ab13d1394184f309d92a77e81c099a0be}{get} (size\+\_\+t index)
+\item 
+std\+::size\+\_\+t \hyperlink{classcontainers_1_1_vector_ad93daa14d3585dac313f3bd12d262ba7}{size} () const
+\item 
+long \hyperlink{classcontainers_1_1_vector_a11bd73e5c16f891d6828328feacea6b5}{capacity} () const
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcontainers_1_1_vector_af66e2aa22b515344eb78c8ef50bff0ed}\label{classcontainers_1_1_vector_af66e2aa22b515344eb78c8ef50bff0ed}} 
+std\+::size\+\_\+t \hyperlink{classcontainers_1_1_vector_af66e2aa22b515344eb78c8ef50bff0ed}{size\+\_\+}
+\begin{DoxyCompactList}\small\item\em Size represents the number of elements stored in the vector. \end{DoxyCompactList}\item 
+long \hyperlink{classcontainers_1_1_vector_a96dab5062859bbed7a88930c7df5d33f}{capacity\+\_\+}
+\item 
+\mbox{\Hypertarget{classcontainers_1_1_vector_a836e2b739f42cebe41a00e1f61568877}\label{classcontainers_1_1_vector_a836e2b739f42cebe41a00e1f61568877}} 
+long \hyperlink{classcontainers_1_1_vector_a836e2b739f42cebe41a00e1f61568877}{growth\+\_\+factor\+\_\+} = 2
+\begin{DoxyCompactList}\small\item\em The amount by which the capacity increases each time capacity is used up. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcontainers_1_1_vector_a714ff57d44842fb1a30619ba81510b99}\label{classcontainers_1_1_vector_a714ff57d44842fb1a30619ba81510b99}} 
+std\+::unique\+\_\+ptr$<$ T\mbox{[}$\,$\mbox{]}$>$ \hyperlink{classcontainers_1_1_vector_a714ff57d44842fb1a30619ba81510b99}{data\+\_\+}
+\begin{DoxyCompactList}\small\item\em Pointer to the underlying data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class containers\+::\+Vector$<$ T $>$}
+
+\hyperlink{classcontainers_1_1_vector}{Vector} class Vectors are dynmacially resized, generic containers. This vector implmentation may differ somewhat from a standard implementation in that the underlying data uses a unique pointer, meaning it can only have a single owner at any given time. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcontainers_1_1_vector_aa52463e44a833734438f930bd042950d}\label{classcontainers_1_1_vector_aa52463e44a833734438f930bd042950d}} 
+\index{containers\+::\+Vector@{containers\+::\+Vector}!Vector@{Vector}}
+\index{Vector@{Vector}!containers\+::\+Vector@{containers\+::\+Vector}}
+\subsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\hyperlink{classcontainers_1_1_vector}{containers\+::\+Vector}$<$ T $>$\+::\hyperlink{classcontainers_1_1_vector}{Vector} (\begin{DoxyParamCaption}\item[{std\+::initializer\+\_\+list$<$ T $>$}]{elements }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Cosntruct a vector via list initialization.
+
+
+\begin{DoxyParams}{Parameters}
+{\em elements} & list of elements \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcontainers_1_1_vector_a7100579cb97bfd12a22563ecba4790c3}\label{classcontainers_1_1_vector_a7100579cb97bfd12a22563ecba4790c3}} 
+\index{containers\+::\+Vector@{containers\+::\+Vector}!Vector@{Vector}}
+\index{Vector@{Vector}!containers\+::\+Vector@{containers\+::\+Vector}}
+\subsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\hyperlink{classcontainers_1_1_vector}{containers\+::\+Vector}$<$ T $>$\+::\hyperlink{classcontainers_1_1_vector}{Vector} (\begin{DoxyParamCaption}\item[{std\+::size\+\_\+t}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Contruct a vector that {\ttfamily n} elements
+
+
+\begin{DoxyParams}{Parameters}
+{\em number} & of elements to be insertedin vector \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcontainers_1_1_vector_aeb1cf60022c7fc50ae6b17b2cba845ea}\label{classcontainers_1_1_vector_aeb1cf60022c7fc50ae6b17b2cba845ea}} 
+\index{containers\+::\+Vector@{containers\+::\+Vector}!Vector@{Vector}}
+\index{Vector@{Vector}!containers\+::\+Vector@{containers\+::\+Vector}}
+\subsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\hyperlink{classcontainers_1_1_vector}{containers\+::\+Vector}$<$ T $>$\+::\hyperlink{classcontainers_1_1_vector}{Vector} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Construct an empty vector \mbox{\Hypertarget{classcontainers_1_1_vector_a53ca201d23d5093f1f0a5680bf878a61}\label{classcontainers_1_1_vector_a53ca201d23d5093f1f0a5680bf878a61}} 
+\index{containers\+::\+Vector@{containers\+::\+Vector}!Vector@{Vector}}
+\index{Vector@{Vector}!containers\+::\+Vector@{containers\+::\+Vector}}
+\subsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\hyperlink{classcontainers_1_1_vector}{containers\+::\+Vector}$<$ T $>$\+::\hyperlink{classcontainers_1_1_vector}{Vector} (\begin{DoxyParamCaption}\item[{const \hyperlink{classcontainers_1_1_vector}{Vector}$<$ T $>$ \&}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Copy constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & vector whose elements will be copied to create new vector \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcontainers_1_1_vector_a2c7dfd50610c1fc054516f18ec8a9452}\label{classcontainers_1_1_vector_a2c7dfd50610c1fc054516f18ec8a9452}} 
+\index{containers\+::\+Vector@{containers\+::\+Vector}!Vector@{Vector}}
+\index{Vector@{Vector}!containers\+::\+Vector@{containers\+::\+Vector}}
+\subsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\hyperlink{classcontainers_1_1_vector}{containers\+::\+Vector}$<$ T $>$\+::\hyperlink{classcontainers_1_1_vector}{Vector} (\begin{DoxyParamCaption}\item[{\hyperlink{classcontainers_1_1_vector}{Vector}$<$ T $>$ \&\&}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Move constructor -\/ moves the data of {\ttfamily v} to newly created vector\textquotesingle{}s {\ttfamily data\+\_\+} ptr. {\ttfamily v}\textquotesingle{}s destructor will be called after its data is moved.
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & vector whose data is being moved \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcontainers_1_1_vector_aa34389ddf377eea569195c234feaef93}\label{classcontainers_1_1_vector_aa34389ddf377eea569195c234feaef93}} 
+\index{containers\+::\+Vector@{containers\+::\+Vector}!````~Vector@{$\sim$\+Vector}}
+\index{````~Vector@{$\sim$\+Vector}!containers\+::\+Vector@{containers\+::\+Vector}}
+\subsubsection{\texorpdfstring{$\sim$\+Vector()}{~Vector()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\hyperlink{classcontainers_1_1_vector}{containers\+::\+Vector}$<$ T $>$\+::$\sim$\hyperlink{classcontainers_1_1_vector}{Vector} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Destructor 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcontainers_1_1_vector_a11bd73e5c16f891d6828328feacea6b5}\label{classcontainers_1_1_vector_a11bd73e5c16f891d6828328feacea6b5}} 
+\index{containers\+::\+Vector@{containers\+::\+Vector}!capacity@{capacity}}
+\index{capacity@{capacity}!containers\+::\+Vector@{containers\+::\+Vector}}
+\subsubsection{\texorpdfstring{capacity()}{capacity()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+long \hyperlink{classcontainers_1_1_vector}{containers\+::\+Vector}$<$ T $>$\+::capacity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns the number of elements that can be added to the vector before more memory will be allocated.
+
+\begin{DoxyReturn}{Returns}
+number of elements the vector can hold before more memory is allocated. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcontainers_1_1_vector_ab13d1394184f309d92a77e81c099a0be}\label{classcontainers_1_1_vector_ab13d1394184f309d92a77e81c099a0be}} 
+\index{containers\+::\+Vector@{containers\+::\+Vector}!get@{get}}
+\index{get@{get}!containers\+::\+Vector@{containers\+::\+Vector}}
+\subsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::experimental\+::optional$<$T$>$ \hyperlink{classcontainers_1_1_vector}{containers\+::\+Vector}$<$ T $>$\+::get (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Attempts to get the element at {\ttfamily index}. If the given index is out of bounds, then no value is returned via the optional type.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & index of element being requested\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily std\+::optional} type possibly containing the requested element 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcontainers_1_1_vector_a631c15e8044b459fdf35a9f0acd0d5b0}\label{classcontainers_1_1_vector_a631c15e8044b459fdf35a9f0acd0d5b0}} 
+\index{containers\+::\+Vector@{containers\+::\+Vector}!operator=@{operator=}}
+\index{operator=@{operator=}!containers\+::\+Vector@{containers\+::\+Vector}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\hyperlink{classcontainers_1_1_vector}{Vector}\& \hyperlink{classcontainers_1_1_vector}{containers\+::\+Vector}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \hyperlink{classcontainers_1_1_vector}{Vector}$<$ T $>$ \&}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Copy assignment
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & vector whoe elements will be copied to create a new vector \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcontainers_1_1_vector_aade29fc98f40e726bc1c624d0157e397}\label{classcontainers_1_1_vector_aade29fc98f40e726bc1c624d0157e397}} 
+\index{containers\+::\+Vector@{containers\+::\+Vector}!operator=@{operator=}}
+\index{operator=@{operator=}!containers\+::\+Vector@{containers\+::\+Vector}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\hyperlink{classcontainers_1_1_vector}{Vector}\& \hyperlink{classcontainers_1_1_vector}{containers\+::\+Vector}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{\hyperlink{classcontainers_1_1_vector}{Vector}$<$ T $>$ \&\&}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Move assignment
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & vector whose data is being moved \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcontainers_1_1_vector_a8dcbd38c932f114a8237785f8272712f}\label{classcontainers_1_1_vector_a8dcbd38c932f114a8237785f8272712f}} 
+\index{containers\+::\+Vector@{containers\+::\+Vector}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!containers\+::\+Vector@{containers\+::\+Vector}}
+\subsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T \hyperlink{classcontainers_1_1_vector}{containers\+::\+Vector}$<$ T $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Indexing
+
+\begin{DoxyReturn}{Returns}
+value at index {\ttfamily i} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcontainers_1_1_vector_a35cb0393f7ba3bc682c1a58a20471a69}\label{classcontainers_1_1_vector_a35cb0393f7ba3bc682c1a58a20471a69}} 
+\index{containers\+::\+Vector@{containers\+::\+Vector}!pop@{pop}}
+\index{pop@{pop}!containers\+::\+Vector@{containers\+::\+Vector}}
+\subsubsection{\texorpdfstring{pop()}{pop()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T \hyperlink{classcontainers_1_1_vector}{containers\+::\+Vector}$<$ T $>$\+::pop (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns the element at the specified index and removes it from the vector. This operation has worst-\/case complexity of O(n) (when the first element is moved, due to the remaining elements being shifted forward a position).
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & index of element being popped\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+element at {\ttfamily index} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcontainers_1_1_vector_ae9ecdc8f09edd4d689b4cb90a05de712}\label{classcontainers_1_1_vector_ae9ecdc8f09edd4d689b4cb90a05de712}} 
+\index{containers\+::\+Vector@{containers\+::\+Vector}!push\+\_\+back@{push\+\_\+back}}
+\index{push\+\_\+back@{push\+\_\+back}!containers\+::\+Vector@{containers\+::\+Vector}}
+\subsubsection{\texorpdfstring{push\+\_\+back()}{push\_back()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \hyperlink{classcontainers_1_1_vector}{containers\+::\+Vector}$<$ T $>$\+::push\+\_\+back (\begin{DoxyParamCaption}\item[{const T \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Append data to end of vector
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & data that will be appended to vector \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcontainers_1_1_vector_ad93daa14d3585dac313f3bd12d262ba7}\label{classcontainers_1_1_vector_ad93daa14d3585dac313f3bd12d262ba7}} 
+\index{containers\+::\+Vector@{containers\+::\+Vector}!size@{size}}
+\index{size@{size}!containers\+::\+Vector@{containers\+::\+Vector}}
+\subsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::size\+\_\+t \hyperlink{classcontainers_1_1_vector}{containers\+::\+Vector}$<$ T $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns the size of the vector (number of elements in vector)
+
+\begin{DoxyReturn}{Returns}
+the number of elements in the vector 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classcontainers_1_1_vector_a96dab5062859bbed7a88930c7df5d33f}\label{classcontainers_1_1_vector_a96dab5062859bbed7a88930c7df5d33f}} 
+\index{containers\+::\+Vector@{containers\+::\+Vector}!capacity\+\_\+@{capacity\+\_\+}}
+\index{capacity\+\_\+@{capacity\+\_\+}!containers\+::\+Vector@{containers\+::\+Vector}}
+\subsubsection{\texorpdfstring{capacity\+\_\+}{capacity\_}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+long \hyperlink{classcontainers_1_1_vector}{containers\+::\+Vector}$<$ T $>$\+::capacity\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+Capacity is the number of elements that can be stored in the vector before more memory needs to be allocated 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/containers/vector.\+h\end{DoxyCompactItemize}
