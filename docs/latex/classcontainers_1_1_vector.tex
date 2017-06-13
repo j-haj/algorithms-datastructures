@@ -29,7 +29,7 @@ void \hyperlink{classcontainers_1_1_vector_ae9ecdc8f09edd4d689b4cb90a05de712}{pu
 \item 
 T \hyperlink{classcontainers_1_1_vector_a35cb0393f7ba3bc682c1a58a20471a69}{pop} (size\+\_\+t index=0)
 \item 
-std\+::experimental\+::optional$<$ T $>$ \hyperlink{classcontainers_1_1_vector_ab13d1394184f309d92a77e81c099a0be}{get} (size\+\_\+t index)
+std\+::experimental\+::optional$<$ T $>$ \hyperlink{classcontainers_1_1_vector_ae744150cc6b0cd929d45e0e138fd5d29}{get} (size\+\_\+t index) noexcept
 \item 
 std\+::size\+\_\+t \hyperlink{classcontainers_1_1_vector_ad93daa14d3585dac313f3bd12d262ba7}{size} () const
 \item 
@@ -143,12 +143,12 @@ Returns the number of elements that can be added to the vector before more memor
 \begin{DoxyReturn}{Returns}
 number of elements the vector can hold before more memory is allocated. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classcontainers_1_1_vector_ab13d1394184f309d92a77e81c099a0be}\label{classcontainers_1_1_vector_ab13d1394184f309d92a77e81c099a0be}} 
+\mbox{\Hypertarget{classcontainers_1_1_vector_ae744150cc6b0cd929d45e0e138fd5d29}\label{classcontainers_1_1_vector_ae744150cc6b0cd929d45e0e138fd5d29}} 
 \index{containers\+::\+Vector@{containers\+::\+Vector}!get@{get}}
 \index{get@{get}!containers\+::\+Vector@{containers\+::\+Vector}}
 \subsubsection{\texorpdfstring{get()}{get()}}
 {\footnotesize\ttfamily template$<$typename T $>$ \\
-std\+::experimental\+::optional$<$T$>$ \hyperlink{classcontainers_1_1_vector}{containers\+::\+Vector}$<$ T $>$\+::get (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+std\+::experimental\+::optional$<$T$>$ \hyperlink{classcontainers_1_1_vector}{containers\+::\+Vector}$<$ T $>$\+::get (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
 Attempts to get the element at {\ttfamily index}. If the given index is out of bounds, then no value is returned via the optional type.
 

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['size_5f',['size_',['../classcontainers_1_1_vector.html#af66e2aa22b515344eb78c8ef50bff0ed',1,'containers::Vector']]]
+  ['next_5f',['next_',['../classcontainers_1_1_list_node.html#a1498d1898e79b1a5e8cc9ee3a557c041',1,'containers::ListNode']]]
 ];

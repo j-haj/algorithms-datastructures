@@ -1,0 +1,154 @@
+\hypertarget{classcontainers_1_1_list}{}\section{containers\+:\+:List$<$ T $>$ Class Template Reference}
+\label{classcontainers_1_1_list}\index{containers\+::\+List$<$ T $>$@{containers\+::\+List$<$ T $>$}}
+
+
+{\ttfamily \#include $<$list.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+T \& \hyperlink{classcontainers_1_1_list_ad3b0886c4fe5c1d62f466ade98d02b9a}{operator\mbox{[}$\,$\mbox{]}} (size\+\_\+t index)
+\item 
+std\+::experimental\+::optional$<$ T $>$ \hyperlink{classcontainers_1_1_list_a3b0510ea498d73a1984dbcb3e06335d9}{get} (size\+\_\+t index) noexcept
+\item 
+void \hyperlink{classcontainers_1_1_list_abea32f6ba898dde0359e221c0a89c32f}{insert} (T \&o)
+\item 
+void \hyperlink{classcontainers_1_1_list_a9735132533e43ccf82fe0c6b2f54221b}{append} (T \&v)
+\item 
+void \hyperlink{classcontainers_1_1_list_a39a750f3454f840c0a7c60c6efa03c12}{remove} (size\+\_\+t index)
+\item 
+void \hyperlink{classcontainers_1_1_list_a533da87ddf7ccd825e80fffa2ff73437}{pop} (size\+\_\+t index=0)
+\item 
+size\+\_\+t \hyperlink{classcontainers_1_1_list_a9b1cb61c1a73150a8da3eb576eeb812a}{size} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcontainers_1_1_list_adbbbbae2d1b234307451c0561a7cd1db}\label{classcontainers_1_1_list_adbbbbae2d1b234307451c0561a7cd1db}} 
+std\+::shared\+\_\+ptr$<$ \hyperlink{classcontainers_1_1_list_node}{List\+Node}$<$ T $>$ $>$ \hyperlink{classcontainers_1_1_list_adbbbbae2d1b234307451c0561a7cd1db}{root\+\_\+}
+\begin{DoxyCompactList}\small\item\em Reference to the root node. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcontainers_1_1_list_a59047cbff0b14426db221552d008e99e}\label{classcontainers_1_1_list_a59047cbff0b14426db221552d008e99e}} 
+std\+::shared\+\_\+ptr$<$ \hyperlink{classcontainers_1_1_list_node}{List\+Node}$<$ T $>$ $>$ \hyperlink{classcontainers_1_1_list_a59047cbff0b14426db221552d008e99e}{tail\+\_\+}
+\begin{DoxyCompactList}\small\item\em Reference to the tail node. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcontainers_1_1_list_af5ec7defa4d55596c15d57fddb6c2ebf}\label{classcontainers_1_1_list_af5ec7defa4d55596c15d57fddb6c2ebf}} 
+size\+\_\+t \hyperlink{classcontainers_1_1_list_af5ec7defa4d55596c15d57fddb6c2ebf}{size\+\_\+}
+\begin{DoxyCompactList}\small\item\em The number of elements stored in the list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class containers\+::\+List$<$ T $>$}
+
+The {\ttfamily \hyperlink{classcontainers_1_1_list}{List}} class provides a doubly linked list implementation and supports basic operations such as {\ttfamily insert}, {\ttfamily append}, {\ttfamily remove}, and element access via {\ttfamily get}, which uses {\ttfamily std\+::optional$<$\+T$>$}, or via {\ttfamily operator}\mbox{[}\mbox{]}. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcontainers_1_1_list_a9735132533e43ccf82fe0c6b2f54221b}\label{classcontainers_1_1_list_a9735132533e43ccf82fe0c6b2f54221b}} 
+\index{containers\+::\+List@{containers\+::\+List}!append@{append}}
+\index{append@{append}!containers\+::\+List@{containers\+::\+List}}
+\subsubsection{\texorpdfstring{append()}{append()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \hyperlink{classcontainers_1_1_list}{containers\+::\+List}$<$ T $>$\+::append (\begin{DoxyParamCaption}\item[{T \&}]{v }\end{DoxyParamCaption})}
+
+Appends an element to the list, giving the list a new tail node
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & the object to be appended to the list \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcontainers_1_1_list_a3b0510ea498d73a1984dbcb3e06335d9}\label{classcontainers_1_1_list_a3b0510ea498d73a1984dbcb3e06335d9}} 
+\index{containers\+::\+List@{containers\+::\+List}!get@{get}}
+\index{get@{get}!containers\+::\+List@{containers\+::\+List}}
+\subsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::experimental\+::optional$<$T$>$ \hyperlink{classcontainers_1_1_list}{containers\+::\+List}$<$ T $>$\+::get (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Attempts to get and return the object at {\ttfamily index}. If {\ttfamily index} is not a valid index, then the optional returned will be empty. This method will not throw an exception.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & location of the object attempting to be accessed\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily std\+::optional$<$\+T$>$} possibly containing the object at {\ttfamily index} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcontainers_1_1_list_abea32f6ba898dde0359e221c0a89c32f}\label{classcontainers_1_1_list_abea32f6ba898dde0359e221c0a89c32f}} 
+\index{containers\+::\+List@{containers\+::\+List}!insert@{insert}}
+\index{insert@{insert}!containers\+::\+List@{containers\+::\+List}}
+\subsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \hyperlink{classcontainers_1_1_list}{containers\+::\+List}$<$ T $>$\+::insert (\begin{DoxyParamCaption}\item[{T \&}]{o }\end{DoxyParamCaption})}
+
+Inserts an object at the head of the list, giving the list a new root node
+
+
+\begin{DoxyParams}{Parameters}
+{\em o} & object to be inserted into the new root node \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcontainers_1_1_list_ad3b0886c4fe5c1d62f466ade98d02b9a}\label{classcontainers_1_1_list_ad3b0886c4fe5c1d62f466ade98d02b9a}} 
+\index{containers\+::\+List@{containers\+::\+List}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!containers\+::\+List@{containers\+::\+List}}
+\subsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T\& \hyperlink{classcontainers_1_1_list}{containers\+::\+List}$<$ T $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index }\end{DoxyParamCaption})}
+
+Access the object at {\ttfamily index}. Will throw a runtime error if {\ttfamily index} is out of range.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & index of the object being accessed within the list\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+object located at {\ttfamily index} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcontainers_1_1_list_a533da87ddf7ccd825e80fffa2ff73437}\label{classcontainers_1_1_list_a533da87ddf7ccd825e80fffa2ff73437}} 
+\index{containers\+::\+List@{containers\+::\+List}!pop@{pop}}
+\index{pop@{pop}!containers\+::\+List@{containers\+::\+List}}
+\subsubsection{\texorpdfstring{pop()}{pop()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \hyperlink{classcontainers_1_1_list}{containers\+::\+List}$<$ T $>$\+::pop (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+Removes the element at {\ttfamily index} in the list and returns it to the caller. The default {\ttfamily index} is 0, so calling {\ttfamily pop} without and argument will return the root, and set the root\textquotesingle{}s pointed to element as the new root.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & the index of the element to remove and return (default value is 0)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the element located at {\ttfamily index} in the list. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcontainers_1_1_list_a39a750f3454f840c0a7c60c6efa03c12}\label{classcontainers_1_1_list_a39a750f3454f840c0a7c60c6efa03c12}} 
+\index{containers\+::\+List@{containers\+::\+List}!remove@{remove}}
+\index{remove@{remove}!containers\+::\+List@{containers\+::\+List}}
+\subsubsection{\texorpdfstring{remove()}{remove()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \hyperlink{classcontainers_1_1_list}{containers\+::\+List}$<$ T $>$\+::remove (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index }\end{DoxyParamCaption})}
+
+Removes the element at {\ttfamily index} without returning it to the caller.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & index of the element to be removed from the list \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcontainers_1_1_list_a9b1cb61c1a73150a8da3eb576eeb812a}\label{classcontainers_1_1_list_a9b1cb61c1a73150a8da3eb576eeb812a}} 
+\index{containers\+::\+List@{containers\+::\+List}!size@{size}}
+\index{size@{size}!containers\+::\+List@{containers\+::\+List}}
+\subsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+size\+\_\+t \hyperlink{classcontainers_1_1_list}{containers\+::\+List}$<$ T $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns the number of elements in the list.
+
+\begin{DoxyReturn}{Returns}
+Number of elements in the list 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/containers/list.\+h\end{DoxyCompactItemize}

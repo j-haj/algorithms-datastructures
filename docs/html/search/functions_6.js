@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_7evector',['~Vector',['../classcontainers_1_1_vector.html#aa34389ddf377eea569195c234feaef93',1,'containers::Vector']]]
+  ['remove',['remove',['../classcontainers_1_1_list.html#a39a750f3454f840c0a7c60c6efa03c12',1,'containers::List']]]
 ];
