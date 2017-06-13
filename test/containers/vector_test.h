@@ -18,7 +18,7 @@ TEST(VectorTest, EmptyConstruction) {
 
 TEST(VectorTest, SizeConstructor) {
   for (int i = 0; i < vector_test::kRepeatNum; ++i) {
-    int size = vector_test::dist();
+    int size = vector_test::dist(vector_test::e);
     auto v = containers::Vector<int>(size);
     ASSERT_EQ(v.size(), size);
   }

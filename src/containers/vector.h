@@ -26,10 +26,12 @@ class Vector {
      */
     Vector(std::initializer_list<T> elements) : size_(elements.size()),
       capacity_(tools::capacity_for_size(elements.size())),
-      data_(std::make_unique<T*>(new T[capacity_])) {
-        for (std::size_t i = 0; i < size_; ++i) {
-          data_[i] = elements[i];
-        }  
+      data_(std::unique_ptr<T[]>(new T[elements.size()])) {
+        size_t idx(0);
+        for (auto it = elements.begin(); it != elements.end(); ++it) {
+          data_[idx] = *it;
+          ++idx;
+        }
       };
 
     /**
@@ -38,12 +40,12 @@ class Vector {
      * @param number of elements to be insertedin vector
      */
     Vector(std::size_t n) : size_(n), capacity_(tools::capacity_for_size(n)), 
-    data_(std::make_unique<T*>(new T[capacity_])) {};
+    data_(std::unique_ptr<T[]>(new T[capacity_])) {};
 
     /**
      * Construct an empty vector
      */
-    Vector() : size_(0), capacity_(2), data_(std::make_unique<T*>(new T[2])) {};
+    Vector() : size_(0), capacity_(2), data_(std::unique_ptr<T[]>(new T[2])) {};
 
     /**
      * Copy constructor
@@ -51,7 +53,7 @@ class Vector {
      * @param v vector whose elements will be copied to create new vector
      */
     Vector(const Vector& v) : size_(v.size()), capacity_(v.capacity()),
-      data_(std::make_unique<T*>(new T[capacity_])) {
+      data_(std::unique_ptr<T[]>(new T[capacity_])) {
         for (std::size_t i = 0; i < size_; ++i) {
           data_[i] = v[i];
         }
@@ -98,7 +100,7 @@ class Vector {
      *
      * @return value at index ``i``
      */
-    T operator[](const std::size_t i) { return data_[i]; }
+    T operator[](const std::size_t i) const { return data_[i]; }
     
     /**
      * Destructor
@@ -156,7 +158,7 @@ class Vector {
      *
      * @return the number of elements in the vector
      */
-    std::size_t size() { return size_; }
+    std::size_t size() const { return size_; }
 
     /**
      * Returns the number of elements that can be added to the vector before
@@ -165,7 +167,7 @@ class Vector {
      * @return number of elements the vector can hold before more memory is
      * allocated.
      */
-    long capacity() { return capacity_; }
+    long capacity() const { return capacity_; }
 
 
   private:
@@ -178,7 +180,7 @@ class Vector {
     long capacity_;
 
     /// Pointer to the underlying data
-    std::unique_ptr<T*> data_;
+    std::unique_ptr<T[]> data_;
 
 }; // class Vector
 

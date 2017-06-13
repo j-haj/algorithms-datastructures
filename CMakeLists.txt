@@ -15,7 +15,6 @@ include_directories(${GTEST_INCLUDE_DIRS})
 include_directories("${PROJECT_SOURCE_DIR}/src")
 
 set(SOURCES
-          ${SRC_DIR}/containers/vector.cc
           ${SRC_DIR}/tools/tools.cc)
 
 set(HEADERS
