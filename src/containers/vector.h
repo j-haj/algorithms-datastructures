@@ -110,6 +110,8 @@ class Vector {
       capacity_ = 0;
       data_.release();
     }
+
+
     //-------------------------------------------------------------------------
     //
     // Member functions
@@ -121,15 +123,24 @@ class Vector {
      *
      * @param x data that will be appended to vector
      */
-    void push_back(const T& x);
+    void push_back(const T& x) {
+      if (size_ == capacity_) {
+        // allocate more memory
+        capacity_ *= growth_factor_;
+        std::unique_ptr<T[]> tmp = std::unique_ptr<T[]>(new T[capacity_]);
 
-    /**
-     * Returns the last element in the vector and removes that element from the
-     * vector. This is an O(1) operation.
-     *
-     * @return last element of vector
-     */
-    T pop();
+        // move data to new memory
+        for (size_t i = 0; i < size_; ++i) {
+          std::swap(tmp[i], data_[i]);
+        }
+        data_.swap(tmp);
+        data_[size_ + 1] = x;
+        ++size_;
+      } else {
+        data_[size_ + 1] = x;
+        ++size_;
+      }
+    }
 
     /**
      * Returns the element at the specified index and removes it from the
@@ -141,7 +152,18 @@ class Vector {
      *
      * @return element at ``index``
      */
-    T pop(long index);
+    T pop(size_t index=0) {
+      if (size_ == 0) {
+        throw std::runtime_error("Cannot pop from an empty vector");
+      }
+      T val = data_[index];
+      for (size_t i = index; i < size_; ++i) {
+        std::swap(data_[i], data_[i+1]);
+      }
+      --size_;
+      return val;
+    }
+
 
     /**
      * Attempts to get the element at ``index``. If the given index is out of
@@ -151,7 +173,12 @@ class Vector {
      *
      * @return ``std::optional`` type possibly containing the requested element
      */
-    std::experimental::optional<T> get(long index);
+    std::experimental::optional<T> get(size_t index) {
+      if (index >= size_) {
+        return std::experimental::optional<T>();
+      }
+      return std::experimental::optional<T>(data_[index]);
+    }
 
     /**
      * Returns the size of the vector (number of elements in vector)
@@ -178,6 +205,9 @@ class Vector {
     /// Capacity is the number of elements that can be stored in the vector before
     /// more memory needs to be allocated
     long capacity_;
+
+    /// The amount by which the capacity increases each time capacity is used up
+    long growth_factor_ = 2;
 
     /// Pointer to the underlying data
     std::unique_ptr<T[]> data_;
