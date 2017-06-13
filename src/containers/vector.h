@@ -173,7 +173,7 @@ class Vector {
      *
      * @return ``std::optional`` type possibly containing the requested element
      */
-    std::experimental::optional<T> get(size_t index) {
+    std::experimental::optional<T> get(size_t index) noexcept {
       if (index >= size_) {
         return std::experimental::optional<T>();
       }
