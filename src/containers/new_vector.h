@@ -9,17 +9,12 @@
 #include "tools/tools.h"
 
 namespace containers {
-/**
- * Vector class
- * Vectors are dynmacially resized, generic containers. This vector
- * implmentation may differ somewhat from a standard implementation in that the
- * underlying data uses a unique pointer, meaning it can only have a single
- * owner at any given time.
- */
+
+  using optional = std::experimental::optional;
+
 template <typename T>
 class VectorImpl {
 
-  using optional = std::experimental::optional;
  public:
   VectorImpl(std::initializer_list<T> elements)
       : size_(elements.size()),
@@ -174,6 +169,18 @@ class VectorImpl {
   }
 
   /**
+   * Sets the size of the container, allocating additional space if necessary
+   *
+   * @param size the amount of space requested for the vector
+   */
+  void set_size(size_t size) {
+    if (size == size_) {
+      return;
+    }
+
+  }
+
+  /**
    * Returns the size of the vector (number of elements in vector)
    *
    * @return the number of elements in the vector
@@ -203,8 +210,26 @@ class VectorImpl {
   /// Pointer to the underlying data
   std::unique_ptr<T[]> data_;
 
+  /// Allocated enough memory to hold `size`
+  void allocate_size(size_t size) {
+    if (size <= size_) {
+      return;
+    }
+    size_t new_capacity = tools::capacity_for_size(size);
+
+    // TODO: what's the best way to allocate memory for greater capacity and
+    // move elements over?
+  }
+
 };  // class VectorImpl
 
+/**
+ * Vector class
+ * Vectors are dynmacially resized, generic containers. This vector
+ * implmentation may differ somewhat from a standard implementation in that the
+ * underlying data uses a unique pointer, meaning it can only have a single
+ * owner at any given time.
+ */
 template <typename T>
 class Vector {
  public:
@@ -335,7 +360,7 @@ class Vector {
    * 
    * @return `std::optional` type possibly containing the requested element
    */
-  optional<T> get(size_t i) noexcept {
+  containers::optional<T> get(size_t i) noexcept {
     if (i >= impl_->size()) {
       return optional<T>();
     }
