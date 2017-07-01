@@ -18,6 +18,8 @@ namespace containers {
  */
 template <typename T>
 class VectorImpl {
+
+  using optional = std::experimental::optional;
  public:
   VectorImpl(std::initializer_list<T> elements)
       : size_(elements.size()),
@@ -98,7 +100,6 @@ class VectorImpl {
    */
   T operator[](const std::size_t i) const { return data_[i]; }
 
-  
   ~VectorImpl() {
     size_ = 0;
     capacity_ = 0;
@@ -226,30 +227,140 @@ class Vector {
   /**
    * Copy constructor
    *
-   * Copy construction for the `Vector` class works by creating a deep copy of
-   * the copied vector's elements. There is no sharing of data between copied
-   * vectors.
+   * Copy construction for the `Vector` class works by copying each of the
+   * elements in the copied vector. This may or may not be copy by value
+   * depending on the element type.
    *
    * @param v vector whose elements will be copied to create a new fector
    */
-  Vector(const Vector& v) {
-    impl_(v->impl_);
+  Vector(const Vector& v) noexcept {
+    const size_t size = v.size();
+    impl_(new VectorImpl(size));
+    for (size_t i = 0; i < size; ++i) {
+      impl_[i] = v[i];
+    }
   }
 
-  Vector& operator=(const Vector& v) {
-    // TODO: COmplete implementation
+  /**
+   * Copy assignement
+   *
+   * @param v vector whose elements are being copied
+   *
+   * @return this
+   */
+  Vector& operator=(const Vector& v) noexcept {
+    const size_t isize = impl_->size();
+    const size_t vsize = v.size();
+
+    // Need to make sure there is enough room to copy the elements
+    imply_->set_size(vsize);
+
+    for (size_t i = 0; i < vsize; ++i) {
+      impl_[i] = v[i];
+    }
+
+    return *this;
   }
-  
+
+  /**
+   * Move constructor
+   *
+   * Moves the data of `v` to newly created vector by transferring `impl_`. 
+   * `v`'s destructor is called at the end of the construction.
+   */
+  Vector(Vector&& v) : impl_(std::move(v.impl_)) {
+    delete v;
+  }
+
+  /**
+   * Move assignment
+   *
+   * Moves `v`' `impl_` to `this` and calls `v`'s destructor
+   *
+   * @param v vector whose data is being moved
+   */
+  Vector& operator=(Vector&& v) {
+    impl_(std::move(v));
+    delete v;
+  }
+
   /**
    * Destructor
    */
-    ~Vector() {
-    delete impl_;
-    }
+  ~Vector() { delete impl_; }
 
-  private:
-    std::unique_ptr<VectorImpl> impl_;
-};
+  /**
+   * Indexing
+   */
+  T operator[](const size_t i) const { return impl_[i]; }
+
+
+  // --------------------------------------------------------------------------
+  //
+  // MEMBER FUNCTIONS
+  //
+  // --------------------------------------------------------------------------
+
+  /**
+   * Append data to the end of the vector
+   *
+   * @param x data being appended to the vector
+   */
+  void push_back(const T& x) noexcept {
+    impl_->push_back(x);
+  }
+
+  /**
+   * Returns the element at the specified index and removes it from the vector.
+   * This operation has worst-case complexity of O(n), which occurs when the
+   * first element is popped, since the remaining elements must be shifted
+   * forward one position.
+   *
+   * @param i index of element being popped
+   *
+   * @return element at index `i`
+   */
+  T pop(size_t i = 0) {
+    if (impl_->size() == 0) {
+      throw std::runtime_error("cannot pop from an empty vector");
+    }
+    return impl_->pop(i);
+  }
+  
+  /**
+   * Attempts to get the element at `i`. If the given index is out of bounds,
+   * then no value is returned via the optional type.
+   *
+   * @param i index of element being requested
+   * 
+   * @return `std::optional` type possibly containing the requested element
+   */
+  optional<T> get(size_t i) noexcept {
+    if (i >= impl_->size()) {
+      return optional<T>();
+    }
+    return optional<T>(impl_->data_[i]);
+  }
+
+  /**
+   * Returns the size of the vector (number of elements in the vector)
+   *
+   * @return the number of elements in the vector
+   */
+  size_t size() const noexcept { return impl_->size(); }
+
+  /**
+   * Returns the number of elements the vector can hold before needing to
+   * allocate additional memory
+   *
+   * @return number of elements vector can hold without need to allocate
+   * additional memory.
+   */
+  size_t capacity() const noexcept { return impl_->capacity(); }
+
+ private:
+  std::unique_ptr<VectorImpl> impl_;
+}; // class Vector
 
 }  // namespace containers
 
