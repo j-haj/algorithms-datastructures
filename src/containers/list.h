@@ -8,6 +8,12 @@ template <typename T>
 struct Node {
   using NodePtr = std::unique_ptr<Node<T>>;
   Node(T val) : value(val), next(nullptr) {}
+  // Note: on copies we only want to copy the value, not the pointer to the next
+  // node
+  Node(const Node& n) : value(n.value), next(nullptr) {}
+  Node(Node&& n) : value(n.value) {
+    next = NodePtr(n.next.release()); 
+  }
   ~Node() {
     next.reset();
   }
