@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "containers/vector_test.h"
+#include "containers/list_test.h"
 
 int main(int argc, char** argv) {
   ::testing::InitGoogleTest(&argc, argv);

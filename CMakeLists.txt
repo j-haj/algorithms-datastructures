@@ -18,11 +18,11 @@ set(SOURCES
           ${SRC_DIR}/tools/tools.cc)
 
 set(HEADERS
-          ${SRC_DIR}/containers/vector.h
+          ${SRC_DIR}/containers/list.h
           ${SRC_DIR}/tools/tools.h)
 
 set(TEST_HEADERS
-          ${TEST_DIR}/containers/vector_test.h)
+          ${SRC_DIR}/containers/list_test.h)
 
 message("SOURCES: ${SOURCES}\n")
 add_executable(test_runner ${TEST_DIR}/test_driver.cc ${SOURCES}

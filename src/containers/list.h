@@ -1,120 +1,71 @@
-#ifndef __LIST_H
-#define __LIST_H
+#ifndef LIST_H_
+#define LIST_H_
 
-namespace containers {
+#include <iostream>
+#include <memory>
 
-/**
- * The @p ListNode class is essentially a wrapper for the data stored by the @p
- * List class.
- */
-template <class T, class Allocator = std::allocator<T>>
-class ListNode {
-public:
+template <class T, class Allocator>
+class Node {
+ public:
   typedef T value_type;
   typedef Allocator allocator_type;
 
   typedef value_type& reference;
   typedef const value_type& const_reference;
 
-  ListNode(T v) : value_(v) {}
-  
-  /// Returns the value of the node
-  T value() { return value_; }
+  using NodePtr = std::unique_ptr<Node<T>>;
+  Node(T val) : value(val), next(nullptr) {}
+  // Note: on copies we only want to copy the value, not the pointer to the next
+  // node
+  Node(const Node& n) : value(n.value), next(nullptr) {}
+  Node(Node&& n) : value(n.value) { next = NodePtr(n.next.release()); }
+  ~Node() { next.reset(); }
 
-private:
+  Node& operator=(Node& n) { return n; }
 
-  /// Holds the node data
-  T value_;
+  /// Holds the data for the node
+  T value;
 
-  /// Points to the next node
-  std::shared_ptr<ListNode<T>> next_;
+  /// Unique pointer to next node in list
+  NodePtr next;
+};
 
-  /// Points to the previous node
-  std::shared_ptr<ListNode<T>> previous_;
-};  
- 
-/**
- * The @p List class provides a doubly linked list implementation and supports
- * basic operations such as @p insert, @p append, @p remove, and element access
- * via @p get, which uses @p std::optional<T>, or via @p operator[].
- */
 template <typename T>
-class List {
+std::ostream& operator<<(std::ostream& os, Node<T>& o) {
+  os << "Node< " << o.value << ", " << o.next.get() << ">";
+  return os;
+}
 
-public:
-  // TODO: Add constructors
+template <typename T>
+class ForwardList {
+  using NodePtr = std::unique_ptr<Node<T>>;
 
-  /**
-   * Access the object at @p index. Will throw a runtime error if @p index is
-   * out of range.
-   *
-   * @param index index of the object being accessed within the list
-   *
-   * @return object located at @p index
-   */
-  T& operator[](size_t index);
- 
-  /**
-   * Attempts to get and return the object at @p index. If @p index is not a
-   * valid index, then the optional returned will be empty. This method will not
-   * throw an exception.
-   *
-   * @param index location of the object attempting to be accessed
-   *
-   * @return @p std::optional<T> possibly containing the object at @p index
-   */ 
-  std::experimental::optional<T> get(size_t index) noexcept;
+ public:
+  void insert(T v) {
+    auto tmp = std::make_unique<Node<T>>(v);
+    tmp->next.reset(head_.release());
+    head_.reset(tmp.release());
+  }
 
-  /**
-   * Inserts an object at the head of the list, giving the list a new root node
-   *
-   * @param o object to be inserted into the new root node
-   */
-  void insert(T& o);
+  size_t size() const noexcept { return size_; }
 
-  /**
-   * Appends an element to the list, giving the list a new tail node
-   *
-   * @param v the object to be appended to the list
-   */
-  void append(T& v);
+  Node<T>* head() { return head_.get(); }
 
-  /**
-   * Removes the element at @p index without returning it to the caller.
-   *
-   * @param index index of the element to be removed from the list
-   */
-  void remove(size_t index);
-
-  /**
-   * Removes the element at @p index in the list and returns it to the caller.
-   * The default @p index is 0, so calling @p pop without and argument will
-   * return the root, and set the root's pointed to element as the new root.
-   *
-   * @param index the index of the element to remove and return (default value
-   * is 0)
-   *
-   * @return Returns the element located at @p index in the list.
-   */
-  void pop(size_t index = 0);
-
-  /**
-   * Returns the number of elements in the list.
-   *
-   * @return Number of elements in the list
-   */
-  size_t size() { return size_; }
-private:
-
-  /// Reference to the root node
-  std::shared_ptr<ListNode<T>> root_;
-
-  /// Reference to the tail node
-  std::shared_ptr<ListNode<T>> tail_;
-
-  /// The number of elements stored in the list
+ private:
+  /// Number of nodes in the list
   size_t size_;
 
-};
-} // namespace containers
-#endif // __LIST_H
+  /// Unique pointer to the head of the list
+  NodePtr head_;
+
+};  // class ForwardList
+
+template <typename T>
+std::ostream& operator<<(std::ostream& os, ForwardList<T>& o) {
+  Node<T>* p = o.head();
+  while (p->next != nullptr) {
+    os << p->value << ' ';
+  }
+}
+
+#endif  // LIST_H_
