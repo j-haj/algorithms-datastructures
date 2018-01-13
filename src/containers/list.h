@@ -7,18 +7,24 @@ namespace containers {
  * The @p ListNode class is essentially a wrapper for the data stored by the @p
  * List class.
  */
-template <typename T>
+template <class T, class Allocator = std::allocator<T>>
 class ListNode {
 public:
-  // TODO: Add constructors
+  typedef T value_type;
+  typedef Allocator allocator_type;
+
+  typedef value_type& reference;
+  typedef const value_type& const_reference;
+
+  ListNode(T v) : value_(v) {}
   
   /// Returns the value of the node
-  T value() { return *value_; }
+  T value() { return value_; }
 
 private:
 
   /// Holds the node data
-  std::unique_ptr<T> value_;
+  T value_;
 
   /// Points to the next node
   std::shared_ptr<ListNode<T>> next_;
