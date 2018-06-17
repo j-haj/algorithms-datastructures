@@ -1,33 +1,33 @@
-#ifndef JTL_HASH_MAP_H__
-#define JTL_HASH_MAP_H__
+#ifndef JTL_FLAT_HASH_MAP_H__
+#define JTL_FLAT_HASH_MAP_H__
 #include <memory>
+#include <cctype>
 
 namespace jtl {
 
+template <typename Key>
+struct Hash {
+  using argument_type = Key;
+  using result_type = std::size_t;
+
+  result_type operator()(const Key& k);
+}; // struct Hash
+
 template <typename Key,
           typename Value>
-class HashMap {
-
+class FlatHashMap {
+  public:
+    FlatHashMap() : bins_(), hash_() {}
   struct MapNode {
     MapNode(Key k, Value v) : key(k), value(v) {}
-    ~MapNode() {
-      delete key;
-      delete value;
-    }
 
     Key key;
     Value value;
   }; // struct MapNode
 
-  class HashMapBase_ {
-    private:
-      // bins is an array of pointers to arrays of key-value nodes
-      MapNode** bins_;       
-
-  }; // class HashMapBase_
-  public:
   private:
-    Key* bins_;
+  std::vector<std::vector<MapNode>> bins_;
+  Hash<Key> hash_;  
 }; // class HashMap
 } // namespace jtl
-#endif
+#endif // JTL_FLAT_HASH_MAP__
