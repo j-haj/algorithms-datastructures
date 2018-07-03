@@ -25,6 +25,15 @@ namespace jtl {
       /// Points to the end of the allocated capacity.
       pointer end_of_storage;
 
+      vector_impl_data() noexcept : start(), end(), end_of_storage() {}
+      vector_impl_data(vector_impl_data&& x) noexcept
+        : start(x.start), end(x.end), end_of_storage(x.end_of_storage) {
+          // Clear data from x
+          x.start = pointer();
+          x.end = pointer();
+          x.end_of_storage = pointer();
+        }
+
       void swap_data(vector_impl_data& x) noexcept {
         std::swap(start, x.start);
         std::swap(end, x.end);
@@ -33,7 +42,7 @@ namespace jtl {
 
     }; // class vector_impl_data
 
-    class vector_impl {
+    class vector_impl : public vector_impl_data {
 
     }; // class vector_impl
 
