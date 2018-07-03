@@ -4,6 +4,16 @@
 #include <iostream>
 #include <memory>
 
+template <class T, class Allocator> Node;
+#ifdef DEBUG
+  template <typename T>
+  std::ostream& operator<<(std::ostream& os, Node<T>& o) {
+    os << "Node< " << o.value << ", " << o.next.get() << ">";
+    return os;
+  }
+#endif
+
+
 template <class T, class Allocator>
 class Node {
  public:
@@ -29,12 +39,6 @@ class Node {
   /// Unique pointer to next node in list
   NodePtr next;
 };
-
-template <typename T>
-std::ostream& operator<<(std::ostream& os, Node<T>& o) {
-  os << "Node< " << o.value << ", " << o.next.get() << ">";
-  return os;
-}
 
 template <typename T>
 class ForwardList {
